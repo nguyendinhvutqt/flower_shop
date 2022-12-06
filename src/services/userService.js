@@ -1,6 +1,6 @@
-const User = require('../models/userModel')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const User = require('../models/userModel')
+const jwtService = require('../services/jwtService')
 
 const createUserService = ({ email, fullName, password }) => {
     return new Promise( async (resolve, reject) => {
@@ -15,7 +15,7 @@ const createUserService = ({ email, fullName, password }) => {
                     })
                 }
                 const hashPassword = bcrypt.hashSync(password, 10)
-                const newUser = User.create({
+                const newUser = await User.create({
                     email: email,
                     fullName: fullName,
                     password: hashPassword,
@@ -34,6 +34,7 @@ const createUserService = ({ email, fullName, password }) => {
                 })
             }
         } catch (error) {
+            console.log('That bai')
             reject({
                 status: 'error',
                 message: error
@@ -41,6 +42,7 @@ const createUserService = ({ email, fullName, password }) => {
         }
     })
 }
+
 
 const loginUserService = ({email, password}) => {
     return new Promise( async (resolve, reject) => {
@@ -51,11 +53,13 @@ const loginUserService = ({email, password}) => {
                 if (checkUser) {
                     const checkPassword = bcrypt.compare(password, checkUser[0].password)
                     if (checkPassword) {
-                        const access_token = jwt.sign({ isAdmin: checkUser[0].role, email: checkUser[0].email, fullName: checkUser[0].fullName})
+                        const access_token = await jwtService.genaralAccessToken({ isAdmin: checkUser[0].role, email: checkUser[0].email, fullName: checkUser[0].fullName})
+                        const refresh_token = await jwtService.genaralRefreshToken({ isAdmin: checkUser[0].role, email: checkUser[0].email, fullName: checkUser[0].fullName})
                         resolve({
                             status: 'success',
                             data: {
-                                access_token
+                                access_token,
+                                refresh_token
                             }
                         })
                     }
@@ -82,7 +86,6 @@ const loginUserService = ({email, password}) => {
             })
         }
     })
-
 }
 
 module.exports = {

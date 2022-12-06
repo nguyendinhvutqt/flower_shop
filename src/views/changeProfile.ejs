@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); -%>
+</head>
+<body>
+    <div>
+        <%- include('./partials/header'); -%>
+    </div>
+    <div class="wrapper">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+              <li class="breadcrumb-item"><a href="/profile">Tài khoản</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Thay đổi thông tin</li>
+            </ol>
+        </nav>
+        <div class="title-login">
+            <h2>TÀI KHOẢN</h2>
+        </div>
+        <div class="content-register row">
+            <div class="col-md-9 mt-3">
+                <div class="info-user">
+                    <h3>Thay đổi thông tin cá nhân</h3>
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="email">Email: *</label>
+                            <input type="email" class="form-control" id="email" disabled=”disabled” placeholder="Nhập họ và tên" value="Nguyendinhvutqt@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Họ và tên: *</label>
+                            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber:">Số điện thoại: *</label>
+                            <input type="text" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ: *</label>
+                            <input type="password" class="form-control" id="address" placeholder="Nhập địa chỉ">
+                        </div>
+                        <button type="submit" class="btn-register">Lưu</button> Hoặc <a href="/profile">trở lại</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <%- include('./partials/plugin'); -%>
+</body>
+</html>

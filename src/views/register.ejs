@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); -%>
+</head>
+<body>
+    <div>
+        <%- include('./partials/header'); -%>
+    </div>
+    <div class="wrapper">
+        <div class="title-login">
+            <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+        </div>
+        <div class="content-register row">
+            <div class="col-md-9 mt-3">
+                <div class="info-user">
+                    <h3>THÔNG TIN CÁ NHÂN</h3>
+                    <% if (status == null) {
+
+                    } else if (status == 'error') { %>
+                        <div class="alert alert-danger"><%= message %></div>
+                        <!-- <h4 id="message-error" style="color: red"><%= message %></h4> -->
+                    <% } else { %>
+                        <div class="alert alert-success">Đăng kí tài khoản thành công</div>
+                        <!-- <h4 id="message-success">Thanh cong</h4> -->
+                    <% } %>
+                    <form method="post" action="/register">
+                        <div class="form-group">
+                            <label for="Email">Địa chỉ email:</label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
+                        </div>
+                        <div class="form-group">
+                            <label for="username:">Họ và tên:</label>
+                            <input type="username" class="form-control" id="fullName" name="fullName" placeholder="Nhập đầy đủ họ tên">
+                        </div>
+                        <div class="form-group">
+                            <label for="Password1">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label for="Password2">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu">
+                        </div>
+                        <button type="submit" class="btn-register">ĐĂNG KÍ</button> Hoặc trở lại <a href="/login">Đăng nhập</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let success = document.querySelector('.alert-success');
+        if (!success) {
+            
+        } else {
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 2000)
+            clearTimeout();
+        }
+    </script>
+    
+    <%- include('./partials/plugin'); -%>
+</body>
+</html>

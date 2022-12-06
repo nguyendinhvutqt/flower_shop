@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); -%>
+</head>
+<body>
+    <div>
+        <%- include('./partials/header'); -%>
+    </div>
+    <div class="wrapper">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Tài khoản</li>
+            </ol>
+        </nav>
+        <div class="title-profile">
+            <h2>TÀI KHOẢN</h2>
+        </div>
+        <div class="text-profile border-bottom">
+            <h3>Tài khoản của tôi</h3>
+        </div>
+        <div class="cart-profile border-bottom">
+            <h4>Lịch sử đặt hàng</h4>
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Đơn hàng</th>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Tổng</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Markggggggg</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <td>Mark</td>
+                        <td>Markggggggg</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            
+        </div>
+        <div class="info-profile mt-4">
+            <h4>Thông tin tài khoản</h4>
+            <div class="table-responsive-md">
+                <table class="table">
+                  <tr class="col">
+                    <td>Họ và tên:</td>
+                    <td>Nguyễn Đình Vũ</td>
+                  </tr>
+                  <tr class="col">
+                    <td>Email:</td>
+                    <td>nguyendinhvutqt@gmail.com</td>
+                  </tr>
+                  <tr class="col">
+                    <td>Số điện thoại:</td>
+                    <td>0349572017</td>
+                  </tr>
+                  <tr class="col">
+                    <td>Địa chỉ:</td>
+                    <td>Lê Hồng Phong, Thủ Dầu Một, Bình Dương</td>
+                  </tr>
+                </table>
+            </div>
+            <div class="group-btn row">
+                <a class="btn-register col-md-3 mt-2 ml-2" href="/user/change-profile">Thay đổi thông tin</a>
+                <a class="btn-register col-md-3 mt-2 ml-2" href="/user/change-password">Thay đổi Mật khẩu</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <%- include('./partials/plugin'); -%>
+</body>
+</html>
