@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const cors = require('cors');
 
 const connectDB = require('./configs/configDB')
 const configViewEngine = require('./configs/configViewEngine')
@@ -12,10 +14,11 @@ const port = 3001;
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
+app.use(cors())
 app.use(bodyParser.json())
+app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/user', express.static(path.join(__dirname, 'public')))
 
 configViewEngine(app);
 connectDB()

@@ -48,37 +48,84 @@ const loginUserService = ({email, password}) => {
     return new Promise( async (resolve, reject) => {
         try {
             const isEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)
-            if (isEmail) {
-                const checkUser = await User.find({email: email})
-                if (checkUser) {
-                    const checkPassword = bcrypt.compare(password, checkUser[0].password)
-                    if (checkPassword) {
-                        const access_token = await jwtService.genaralAccessToken({ isAdmin: checkUser[0].role, email: checkUser[0].email, fullName: checkUser[0].fullName})
-                        const refresh_token = await jwtService.genaralRefreshToken({ isAdmin: checkUser[0].role, email: checkUser[0].email, fullName: checkUser[0].fullName})
-                        resolve({
-                            status: 'success',
-                            data: {
-                                access_token,
-                                refresh_token
-                            }
-                        })
-                    }
-                    resolve({
-                        status: 'error',
-                        message: 'Email hoặc mật khẩu không đúng!'
-                    })
-                } else {
-                    resolve({
-                        status: 'error',
-                        message: 'Email không tồn tại!'
-                    })
-                }
-            } else {
+            if (!isEmail) {
                 resolve({
                     status: 'error',
                     message: 'Email không đúng định dạng!'
                 })
+            } 
+            const checkUser = await User.findOne({
+                email: email
+            })
+            if (checkUser === null) {
+                resolve({
+                    status: 'error',
+                    message: 'Email không tồn tại!'
+                })
             }
+            const checkPassword = await bcrypt.compare(password, checkUser.password)
+            if (checkPassword) {
+                const access_token = await jwtService.genaralAccessToken({ id: checkUser.id, isAdmin: checkUser.isAdmin, email: checkUser.email, fullName: checkUser.fullName})
+                const refresh_token = await jwtService.genaralRefreshToken({ id: checkUser.id, isAdmin: checkUser.isAdmin, email: checkUser.email, fullName: checkUser.fullName})
+                resolve({
+                    status: 'success',
+                    data: {
+                        access_token,
+                        refresh_token
+                    }
+                })
+            }
+            resolve({
+                status: 'error',
+                message: 'Mật khẩu không đúng!'
+            })
+        } catch (error) {
+            reject({
+                status: 'error',
+                message: error
+            })
+        }
+    })
+}
+
+const updateUserService = (id, data) => {
+    return new Promise( async (resolve, reject) => {
+        try {
+            const checkUser = await User.find({id})
+            if (!checkUser) {
+                resolve({
+                    status: 'error',
+                    message: 'User không tồn tại!'
+                })
+            } 
+            const updateUser = await User.findByIdAndUpdate(id, data, { new: true })
+            resolve({
+                status: 'success',
+                data: updateUser
+            })
+        } catch (error) {
+            reject({
+                status: 'error',
+                message: error
+            })
+        }
+    })
+}
+
+const deleteUserService = (id) => {
+    return new Promise( async (resolve, reject) => {
+        try {
+            const checkUser = await User.find({id})
+            if (!checkUser) {
+                resolve({
+                    status: 'error',
+                    message: 'User không tồn tại!'
+                })
+            }
+            await User.findByIdAndRemove(id)
+            resolve({
+                status: 'success'
+            })
         } catch (error) {
             reject({
                 status: 'error',
@@ -90,5 +137,7 @@ const loginUserService = ({email, password}) => {
 
 module.exports = {
     createUserService,
-    loginUserService
+    loginUserService,
+    updateUserService,
+    deleteUserService
 }

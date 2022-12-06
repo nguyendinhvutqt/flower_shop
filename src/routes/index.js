@@ -1,7 +1,7 @@
 const userRouter = require('./userRouter')
 
 const routes = (app) => {
-    app.use('/', userRouter);
+    app.use('/user', userRouter);
     app.use('/', (req, res) => {
         res.render('home.ejs')
     })

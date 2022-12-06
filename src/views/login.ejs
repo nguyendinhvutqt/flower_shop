@@ -16,21 +16,30 @@
                 <div class="wrap-register">
                     <h3>KHÁCH HÀNG MỚI</h3>
                     <p>Bằng cách tạo tài khoản với cửa hàng của chúng tôi, bạn sẽ có thể chuyển qua quy trình thanh toán nhanh hơn, lưu trữ nhiều địa chỉ giao hàng, xem và theo dõi đơn hàng của bạn trong tài khoản của bạn và hơn thế nữa.</p>
-                    <a class="btn-register" href="/register">TẠO TÀI KHOẢN</a>
+                    <a class="btn-register" href="/user/register">TẠO TÀI KHOẢN</a>
                 </div>
             </div>
             <div class="col-md-6 mt-3">
                 <div class="wrap-login">
                     <h3>ĐĂNG NHẬP</h3>
+                    <% if (status == null) {
+
+                    } else if (status == 'error') { %>
+                        <div class="alert alert-danger"><%= message %></div>
+                        <!-- <h4 id="message-error" style="color: red"><%= message %></h4> -->
+                    <% } else { %>
+                        <div class="alert alert-success">Đăng nhập thành công!</div>
+                        <!-- <h4 id="message-success">Thanh cong</h4> -->
+                    <% } %>
                     <form method="post">
                         <div class="form-group">
                             <label for="email">Địa chỉ email:</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email">
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email">
                             <small id="emailHelp" class="form-text text-muted">Chúng tôi sẽ không bao giờ chia sẻ email của bạn với bất kỳ ai khác.</small>
                         </div>
                         <div class="form-group">
                             <label for="password">Mật khẩu:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
                         </div>
                         <button type="submit" class="btn-register mt-2">ĐĂNG NHẬP</button>
                     </form>
@@ -38,7 +47,17 @@
             </div>
         </div>
     </div>
-    
+    <script>
+        let success = document.querySelector('.alert-success');
+        if (!success) {
+            
+        } else {
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 2000)
+            clearTimeout();
+        }
+    </script>    
     
     <%- include('./partials/plugin'); -%>
 </body>

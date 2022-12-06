@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
                 message: 'Tài khoản chưa được xác thực'
             })
         }
-        if (user) {
+        if (user.isAdmin) {
             next()
         } else {
             return res.status(404).json({

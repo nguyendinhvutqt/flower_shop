@@ -8,7 +8,7 @@ const userSchema = new Schema({
     address: { type: String, default: null },
     access_token: { type: String, default: null },
     refresh_token: { type: String, default: null },
-    role: { type: Number, default: 0 }
+    isAdmin: { type: Boolean, default: false }
 },
 {
     timestamps: true,

@@ -1,25 +1,33 @@
 const userService = require('../services/userService')
-const User = require('../models/userModel')
+const jwtService = require('../services/jwtService')
 
 const getLogin = (req, res) => {
-    return res.render('login.ejs')
+    return res.render('login.ejs', { status: null, data: null })
 }
 
 const getRegister = (req, res) => {
-    return res.render('register.ejs', {status: null, data: null})
+    return res.render('register.ejs', { status: null, data: null })
 }
 
 const loginUserService = async (req, res) => {
     const { email, password } = req.body
-    if ( email && password ) {
-        const response = await userService.loginUserService({email, password})
-        return res.json(response)
-    } else {
-        return res.json({
+    console.log('data', req.body)
+    if ( !email || !password ) {
+        return res.render('login.ejs', {
             status: 'error',
             message: 'Bạn phải nhập đầy đủ email và mật khẩu!'
         })
+        
     }
+    const response = await userService.loginUserService({email, password})
+    // const { refresh_token, ...newResponse } = response
+    // req.cookie('refresh_token', refresh_token, {
+    //     httpOnly: true,
+    //     secure: false,
+    //     sameSite: 'strict',
+    //     path: '/'
+    // })
+    return res.render('login.ejs', response)
 }
 
 const  registerUserService = async (req, res) => {
@@ -44,22 +52,69 @@ const  registerUserService = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
-    const { email, fullName, password, confirmPassword } = req.body
-    const newUser = await User.create({email: email, fullName: fullName, password: password})
-    if (newUser) {
-        return res.json({
-            status: 'success', 
-            data: {newUser}
+const updateUserService = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const data = req.body
+        if (!userId) {
+            return res.json({
+                status: 'error',
+                message: 'Không tồn tại userId!'
+            })
+        }
+        const response = await userService.updateUserService(userId, data)
+        if (response) {
+            return res.json(response)
+        }
+    } catch (error) {
+        return res.json({ message: error })
+    }
+}
+
+const deleteUserService = async (req, res) => {
+    try {
+        const userId = req.params.id
+        if (!userId) {
+            return res.json({
+                status: 'error',
+                message: 'Không tồn tại userId!'
+            })
+        }
+        const response = await userService.deleteUserService(userId)
+        if (response) {
+            return res.json(response)
+        }
+    } catch (error) {
+        return res.json({ message: error })
+    }
+}
+
+const refreshToken = async (req, res) => {
+    try {
+        const token = req.cookies.refresh_token
+        if (!token) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The token is required'
+            })
+        }
+        const response = await jwtService.refreshTokenJwtService(token)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
         })
     }
 }
+
 
 module.exports = {
     getLogin,
     getRegister,
     loginUserService,
     registerUserService,
-    createUser
+    updateUserService,
+    deleteUserService,
+    refreshToken
 }
 

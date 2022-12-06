@@ -21,10 +21,10 @@
                         <div class="alert alert-danger"><%= message %></div>
                         <!-- <h4 id="message-error" style="color: red"><%= message %></h4> -->
                     <% } else { %>
-                        <div class="alert alert-success">Đăng kí tài khoản thành công</div>
+                        <div class="alert alert-success">Đăng kí tài khoản thành công!</div>
                         <!-- <h4 id="message-success">Thanh cong</h4> -->
                     <% } %>
-                    <form method="post" action="/register">
+                    <form method="post" action="/user/register">
                         <div class="form-group">
                             <label for="Email">Địa chỉ email:</label>
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
@@ -41,7 +41,7 @@
                             <label for="Password2">Nhập lại mật khẩu</label>
                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu">
                         </div>
-                        <button type="submit" class="btn-register">ĐĂNG KÍ</button> Hoặc trở lại <a href="/login">Đăng nhập</a>
+                        <button type="submit" class="btn-register">ĐĂNG KÍ</button> Hoặc trở lại <a href="/user/login">Đăng nhập</a>
                     </form>
                 </div>
             </div>
