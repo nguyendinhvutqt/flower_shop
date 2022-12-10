@@ -78,88 +78,45 @@
 			<h1>BÁN CHẠY NHẤT</h1>
 			<p>TOP NHỮNG SẢN PHẨM BÁN CHẠY NHẤT</p>
 		</div>
-		<div  class="list-items row">
-			<div class="col-lg-3 col-md-6 mt-2" >
-				<div class="item">
-					<img class="card-img-top" src="./img/content/2.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2">
-				<div class="item">
-					<img class="card-img-top" src="./img/content/1.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
+		<div class="list-items row">
+			<% if (productsTop) {
+				productsTop.map( product => { %>
+					<div class="col-lg-3 col-md-6 mt-2" >
+						<div class="item">
+							<img class="card-img-top" src="uploads/<%=product.image%>" alt="Card image cap">
+							<div class="card-body">
+							<h5 class="card-title"><%= product.name %></h5>
+							<p class="card-text"><%= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}); %></p>
+							<a href="#" class="btn btn-product">Thêm vào giỏ hàng</a>
+						</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2">
-				<div class="item">
-					<img class="card-img-top" src="./img/content/3.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2">
-				<div class="item">
-					<img class="card-img-top" src="./img/content/4.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2" >
-				<div class="item">
-					<img class="card-img-top" src="./img/content/2.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2">
-				<div class="item">
-					<img class="card-img-top" src="./img/content/1.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2">
-				<div class="item">
-					<img class="card-img-top" src="./img/content/3.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 mt-2">
-				<div class="item">
-					<img class="card-img-top" src="./img/content/4.jpg" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Price: 500.000 VND</p>
-					<a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
-					</div>
-				</div>
-			</div>
+				<% })
+			}%>
 		</div>
+</div>
+
+<div class="product-content">
+	<div class="title-content">
+		<h1>SẢN PHẨM MỚI</h1>
+		<p>TOP NHỮNG SẢN PHẨM MỚI</p>
+	</div>
+	<div class="list-items row">
+		<% if (productsNew) {
+			productsNew.map( product => { %>
+				<div class="col-lg-3 col-md-6 mt-2" >
+					<div class="item">
+						<img class="card-img-top" src="uploads/<%=product.image%>" alt="Card image cap">
+						<div class="card-body">
+						<h5 class="card-title"><%= product.name %></h5>
+						<p class="card-text"><%= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}); %></p>
+						<a href="#" class="btn btn-product">Thêm vào giỏ hàng</a>
+					</div>
+					</div>
+				</div>
+			<% })
+		}%>
+	</div>
 </div>
 
 	

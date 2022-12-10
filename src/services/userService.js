@@ -70,6 +70,7 @@ const loginUserService = ({email, password}) => {
                 resolve({
                     status: 'success',
                     data: {
+                        fullName: checkUser.fullName,
                         access_token,
                         refresh_token
                     }

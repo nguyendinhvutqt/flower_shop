@@ -1,5 +1,7 @@
 const userService = require('../services/userService')
 const jwtService = require('../services/jwtService')
+const Product = require('../models/productModel')
+
 
 const getLogin = (req, res) => {
     return res.render('login.ejs', { status: null, data: null })
@@ -36,7 +38,7 @@ const  registerUserService = async (req, res) => {
     if ( !email || !fullName || !password || !confirmPassword ) {
         return res.render('register.ejs', {
             status: 'error',
-            message: 'Bạn phải nhập đầy đủ thông tin'
+            message: 'Bạn phải nhập đầy đủ thông tin!'
         })
     }
     if (password !== confirmPassword) {

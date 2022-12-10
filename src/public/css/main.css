@@ -42,7 +42,6 @@ body {
 
 .category-content {
     padding: 20px;
-    background-color: bisque;
 }
 
 .card-category {
@@ -87,7 +86,8 @@ body {
 }
 
 .card-img-top {
-    max-height: 250px;
+    max-height: 230px;
+    border-radius: 10px;
 }
 
 
@@ -99,8 +99,8 @@ body {
 
 .item {
     padding: 5px;
-    border-radius: 3px;
-    background-color: bisque;
+    border-radius: 10px;
+    border: 1px solid blue;
 }
 
 /* login */
@@ -172,4 +172,24 @@ body {
 
 .cart-profile {
     padding: 20px 0;
+}
+
+
+.btn-product {
+    border: 1px solid blue;
+    background-color: white;
+    opacity: 0.8;
+    color: black !important;
+    padding: 10px 20px;
+    height: 45px;
+    width: 200px;
+    text-align: center;
+    font-weight: 800;
+    border-radius: 10px;
+    text-decoration: none !important;
+
+}
+
+.btn-product:hover {
+    transform: scale(1.1);
 }
